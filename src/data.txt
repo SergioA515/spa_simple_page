@@ -1,0 +1,108 @@
+Para crear una Single Page Application (SPA) utilizando JavaScript vanilla sin necesidad de Express o muchas librerías, puedes seguir estos pasos:
+
+Estructura básica del HTML: Crea un archivo HTML con las etiquetas básicas, como <html>, <head> y <body>. Dentro del <body>, crea un contenedor principal donde se renderizarán las diferentes vistas de tu SPA.
+
+Manejo de rutas: Utiliza el objeto window.location para detectar cambios en la URL y determinar qué vista debe mostrarse. Puedes utilizar el evento popstate para detectar cambios en la historia del navegador y actualizar la vista en consecuencia.
+
+Creación de vistas: Crea funciones que generen el contenido HTML de cada vista. Puedes utilizar plantillas de cadena de texto o utilizar el método createElement para crear elementos HTML dinámicamente. Luego, agrega estos elementos al contenedor principal.
+
+Navegación entre vistas: Crea enlaces <a> dentro de tu SPA y utiliza el atributo href para cambiar la URL. Puedes utilizar el método pushState del objeto history para actualizar la URL sin recargar la página. Asegúrate de manejar el evento click de los enlaces para evitar la recarga de la página.
+
+Estilos y diseño: Utiliza CSS para dar estilo a tus vistas y hacerlas responsivas. Puedes utilizar clases de CSS para aplicar estilos a los elementos HTML generados dinámicamente.
+
+Aquí tienes un ejemplo básico de cómo podrías estructurar tu código:
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mi SPA</title>
+  <style>
+    /* Estilos para las vistas */
+    .view {
+      display: none;
+    }
+
+    .view.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/" class="nav-link">Inicio</a>
+    <a href="/hotel" class="nav-link">Hotel</a>
+    <a href="/servicios" class="nav-link">Servicios</a>
+    <a href="/contactenos" class="nav-link">Contáctenos</a>
+  </nav>
+
+  <div id="app">
+    <!-- Contenedor principal donde se renderizarán las vistas -->
+  </div>
+
+  <script>
+    // Funciones para generar las vistas
+    function renderHome() {
+      const view = document.createElement('div');
+      view.classList.add('view', 'active');
+      view.textContent = 'Esta es la página de inicio';
+      return view;
+    }
+
+    function renderHotel() {
+      const view = document.createElement('div');
+      view.classList.add('view');
+      view.textContent = 'Esta es la página del hotel';
+      return view;
+    }
+
+    function renderServicios() {
+      const view = document.createElement('div');
+      view.classList.add('view');
+      view.textContent = 'Esta es la página de servicios';
+      return view;
+    }
+
+    function renderContactenos() {
+      const view = document.createElement('div');
+      view.classList.add('view');
+      view.textContent = 'Esta es la página de contacto';
+      return view;
+    }
+
+    // Función para cambiar la vista según la URL
+    function changeView() {
+      const path = window.location.pathname;
+      const views = document.querySelectorAll('.view');
+
+      views.forEach(view => {
+        view.classList.remove('active');
+        if (view.dataset.path === path) {
+          view.classList.add('active');
+        }
+      });
+    }
+
+    // Manejo del evento popstate para cambiar la vista
+    window.addEventListener('popstate', changeView);
+
+    // Manejo del evento click para evitar la recarga de la página
+    document.addEventListener('click', e => {
+      if (e.target.matches('.nav-link')) {
+        e.preventDefault();
+        const path = e.target.getAttribute('href');
+        window.history.pushState(null, null, path);
+        changeView();
+      }
+    });
+
+    // Renderizar la vista inicial
+    const app = document.getElementById('app');
+    app.appendChild(renderHome());
+  </script>
+</body>
+</html>
+En este ejemplo, se utiliza JavaScript vanilla para manejar la navegación entre vistas y renderizar el contenido dinámicamente. Se utiliza CSS para ocultar y mostrar las vistas según sea necesario.
+
+Recuerda que este es solo un ejemplo básico y que hay muchas formas de implementar una SPA con JavaScript vanilla. Puedes agregar más funcionalidades y mejorar el diseño según tus necesidades.
+
+Espero que esto te ayude a crear tu SPA con JavaScript vanilla. ¡Buena suerte!
