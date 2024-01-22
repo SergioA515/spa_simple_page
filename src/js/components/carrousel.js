@@ -1,0 +1,1 @@
+// aquí se realizara la logica de interacción del carrousel 
