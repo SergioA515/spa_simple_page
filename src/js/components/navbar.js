@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   button.addEventListener("click", () => {
     console.log("click del boton");
-    menu.classList.toggle("lg:hidden");
+    menu.classList.toggle("hidden");
     console.log("click");
   });
 });
