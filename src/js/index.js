@@ -1,4 +1,8 @@
 import * as obj from './components/map'
+import { showImage, nextImage } from './components/carrousel';
+
+setInterval(nextImage, 5000);
+
 // declaración global de elemetos importados initMap y apikey
 window.initMap=obj.initMap;
 window.apikey=obj.apikey;
